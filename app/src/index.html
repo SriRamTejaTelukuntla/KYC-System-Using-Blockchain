@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC System For Demat Account Using Blockchain</title>
+    
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;">
+    <div style="text-align:center;width: 300px; margin: 0 auto; border-style:solid; border-width: 1px; padding: 25px; background-color:#597ea157 ;">
+        <h1>KYC Details</h1>
+        Full Name: <input type="text" id="_fullname">
+        <br/><br/>
+        Father Name: <input type="text" id="_fathername">
+        <br/><br/>
+        Aadhar Number: <input type="text" id="_aadhar_number">
+        <br/><br/>
+        Phone Number: <input type="text" id="_phone_number">
+        <br/><br/>
+        Location: <input type="text" id="_location">
+        <br/><br/>
+        Gender: <select name="Gender" id="_gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+                </select> 
+        <br/><br/>
+        Date Of birth: <input type="text" id="_dob">
+        <br/><br/>
+        <button onclick="App.setUser()">Submit</button>
+    </div>
+    <br>
+
+    <div style="text-align:center;width: 300px; margin: 0 auto; border-style:solid; border-width: 1px; padding: 25px; background-color:#597ea157 ">
+        <h1>Get Kyc Details</h1>
+        Aadhar Number: <input type="text" id="inputaadharnumber"> 
+        <br/><br/>
+        <button onclick="App.getUser()">Search</button>
+    </div>
+    
+
+    <script src="index.js"></script>
+    
+</body>
+</html>
