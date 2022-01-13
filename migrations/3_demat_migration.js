@@ -1,5 +1,5 @@
-const dematContract = artifacts.require("DematContract");
+const DematContract = artifacts.require("DematContract");
 
 module.exports = function (deployer) {
-  deployer.deploy(dematContract);
+  deployer.deploy(DematContract);
 };

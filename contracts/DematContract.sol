@@ -9,7 +9,7 @@ contract DematContract
 
     constructor ()
     {
-    user = KycContract(kycaddress);
+        user = KycContract(kycaddress);
     }  
      
     function validateUser(string memory _aadhar_number) view public returns(bool)
