@@ -6,36 +6,36 @@ body {
     font-family: 'Red Hat Display', sans-serif !important;
 }
 
-  .flex-hero {
-      display: flex;
-  }
-  /* Place text in the middle of the image */
-  .hero-text {
+.flex-hero {
+    display: flex;
+}
+    /* Place text in the middle of the image */
+    .hero-text {
     margin-top: 20%;
     text-align: left;
     color: white;
-  }
+    }
 
-  .hero-img{
-      margin-left: 10%;
-      margin-top: 10%;
-  }
-  .hero-text-h1 {
-      font-size: 80px !important;
-      line-height: 90px !important;
-      text-align: left;
-      font-weight: 900;
-  }
+.hero-img{
+    margin-left: 10%;
+    margin-top: 10%;
+}
+.hero-text-h1 {
+    font-size: 80px !important;
+    line-height: 90px !important;
+    text-align: left;
+    font-weight: 900;
+}
 
-  .hero-para {
-      letter-spacing: 1px;
-      font-weight: 600;
-      color: rgb(179, 179, 179);
-  }
+.hero-para {
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: rgb(179, 179, 179);
+}
 
-  .form-h1 {
-      font-weight: 700;
-  }
+.form-h1 {
+    font-weight: 700;
+}
 
 p{
     font-size: 18px;
@@ -121,10 +121,8 @@ h1{
     cursor: pointer;
   }
 
-
-/**************************/
 /*     03. Navigation     */
-/**************************/
+
 .navbar-custom {
     transition: all 0.2s;
 }
@@ -144,18 +142,14 @@ h1{
     margin-bottom: 0.5rem;
 }
 
-/* .navbar-custom {
-    padding: 0.25rem 1.5rem 0.2rem 2rem;
-}*/
 
 .navbar-custom .navbar-nav {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-/*********************/
 /*    04. Header     */
-/*********************/
+
 .header {
     /* background-color: #fff; */
 }

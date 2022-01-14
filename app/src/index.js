@@ -107,9 +107,15 @@ const App = {
         await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).send({
             from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
         });
+    },
+
+    validateUser: async function() {
+        
     }
     
+    
 }
+
 
 window.App = App;
 
