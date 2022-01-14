@@ -31,7 +31,7 @@ body {
 .hero-para {
     letter-spacing: 1px;
     font-weight: 600;
-    color: rgb(179, 179, 179);
+    color: rgb(197, 197, 197);
 }
 
 .form-h1 {
@@ -46,7 +46,7 @@ p{
 
 h1{
     font-weight: 800;
-    padding-bottom: 34px;
+    padding-bottom: 24px;
     text-align: center;
     color: rgb(56, 56, 56);
 }
@@ -180,6 +180,16 @@ h1{
     margin-bottom: 1.875rem;
 }
 
+input[type="date" i] {
+    margin: 8px 0;
+    width: 100%;
+    border: 3px solid #597ea16c;
+    border-radius: 4px;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 10px;
+}
 
 input[type=text], select {
     width: 100%;

@@ -74,13 +74,13 @@ const App = {
     },
 
     setUser: async function() {
-        const _fullname = document.getElementById('_fullname').value;
-        const _fathername = document.getElementById('_fathername').value;
-        const _aadhar_number = document.getElementById('_aadhar_number').value;
-        const _phone_number = document.getElementById('_phone_number').value;
-        const _location = document.getElementById('_location').value;
-        const _gender = document.getElementById('_gender').value;
-        const _dob = document.getElementById('_dob').value;
+        const _fullname = document.getElementById('userFullName').value;
+        const _fathername = document.getElementById('userFatherName').value;
+        const _aadhar_number = document.getElementById('userAadharNumber').value;
+        const _phone_number = document.getElementById('userPhoneNumber').value;
+        const _location = document.getElementById('userLocation').value;
+        const _gender = document.getElementById('userGender').value;
+        const _dob = document.getElementById('userDOB').value;
 
         console.log(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob,);
         const gas = await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).estimateGas({
@@ -92,12 +92,20 @@ const App = {
     },
 
     validateUser: async function() {
+        var _aadhar_number = document.getElementById('inputaadharnumber').value;
+        let result = await this.contractInstance.methods.validateUser(_aadhar_number).call();
         
+        console.log(result);
+
+            if(!result) {
+                document.getElementById("verified").innerHTML = "verified ";
+            }
+            else {
+                document.getElementById("verified").innerHTML = "unverified ";
+            }
     }
     
-    
 }
-
 
 window.App = App;
 
