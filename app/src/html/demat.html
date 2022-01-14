@@ -33,16 +33,17 @@
                         <div class="col-lg-6">
                             <div class="text-container">
                                 <h1 class="form-h1">Get KYC Details</h1>
-                                <p>Aadhar Number: <input type="text" id="inputaadharnumber" placeholder="Aadhar Number"></p>
+                                <p>Aadhar Number: <input type="text" id="inputaadharnumber1" placeholder="Aadhar Number"></p>
                                 <br>
                                 <h1 class="form-h1" >User KYC Details</h1>
                                         <p id="full-name"></p>
                                         <p id="father-name"></p>
                                         <p id="aadhar-number"></p>
                                         <p id="phone-number"></p>
-                                        <p id="-location"></p>
-                                        <p id="-gender"></p>
-                                        <p id="-dob"></p>
+                                        <p id="location"></p>
+                                        <p id="gender"></p>
+                                        <p id="dob"></p>
+                                        <p id="exist"></p>
                                     <br>
                                     <div class="button-center">
                                         <button type="submit" class="button-main" onclick="App.getDemat()">Search</button>
@@ -53,14 +54,14 @@
                         <div class="col-lg-6">
                             <div class="text-container">
                                 <h1 class="form-h1">Validate KYC Details</h1>
-                                <p>Aadhar Number: <input type="text" id="inputaadharnumber" placeholder="Aadhar Number"></p>
-                                <br>
-                                <h1 class="form-h1" >User KYC Details</h1>
-                                <p id="verified"></p>
+                                    <p>Aadhar Number: <input type="text" id="inputaadharnumber1" placeholder="Aadhar Number"></p>
                                     <br>
-                                    <div class="button-center">
-                                        <button type="submit" class="button-main" onclick="App.validateUser()">Check</button>
-                                    </div>    
+                                    <h1 class="form-h1" >User KYC Details</h1>
+                                    <p id="verified"></p>
+                                    <br>
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.validateUser()">Check</button>
+                                </div>    
                             </div>
                         </div>
                     </div> <!-- end of row -->

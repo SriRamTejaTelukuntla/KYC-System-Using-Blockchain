@@ -1,5 +1,5 @@
-const kycContract = artifacts.require("kycContract");
+const KycContract = artifacts.require("KycContract");
 
 module.exports = function (deployer) {
-  deployer.deploy(kycContract);
+  deployer.deploy(KycContract);
 };

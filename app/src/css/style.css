@@ -44,6 +44,17 @@ p{
     color: rgb(56, 56, 56);
 }
 
+#verified {
+    text-align: center;
+    font-size: 40px;
+}
+
+#exist {
+    font-size: 20px;
+    text-align: center;
+    color: #db4848;
+}
+
 h1{
     font-weight: 800;
     padding-bottom: 24px;
@@ -72,7 +83,7 @@ h1{
     font-weight: 700;
     margin: 4px 2px;
     cursor: pointer;
-  }
+}
 
   .home-button:hover  {
     width: 80%;
@@ -88,7 +99,7 @@ h1{
     font-weight: 700;
     margin: 4px 2px;
     cursor: pointer;
-  }
+}
 
 .button-main {
     width: 80%;
@@ -104,7 +115,7 @@ h1{
     font-weight: 700;
     margin: 4px 2px;
     cursor: pointer;
-  }
+}
 
   .button-main:hover {
     width: 80%;
@@ -120,7 +131,7 @@ h1{
     font-weight: 700;
     margin: 4px 2px;
     cursor: pointer;
-  }
+}
 
 /*     03. Navigation     */
 

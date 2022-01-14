@@ -47,13 +47,6 @@ contract KycContract {
  
         UsersArray.push(_aadhar_number) ;
 
-        require(bytes(_aadhar_number).length > 0, "No Data Found. Enter Your aadhar_number.");
-        require(bytes(_fullname).length > 0, "No Data Found. Enter Your fullname.");
-        require(bytes(_fathername).length > 0, "No Data Found, Enter Your fathername.");
-        require(uint(_phone_number) > 0, "No Data Found, Enter Your phone number.");
-        require(bytes(_location).length > 0, "No Data Found, Enter location.");
-        require(bytes(_gender).length > 0, "No Data Found. Enter gender.");
-        require(bytes(_dob).length > 0, "No Data Found. Enter Your DOB");
     }
  
     function getUser(string memory _aadhar_number) view public returns(string memory ,string memory, string memory, uint, string memory, string memory, string memory)
