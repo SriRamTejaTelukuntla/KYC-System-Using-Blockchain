@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/all.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="../css/fontawesome-all.css" rel="stylesheet">
 
     <script src="../index.js"></script>
     <title>KYC System For Demat Account Using Blockchain</title>
@@ -25,33 +25,33 @@
         <!-- start of navigation-->
 
     <body>
-    <!-- Header -->
-    <header id="header" class="header">
-        <div class="header-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="text-container">
-                            <h1 class="form-h1">Get KYC Details</h1>
-                            <p>Aadhar Number: <input type="text" id="inputaadharnumber" placeholder="Aadhar Number"></p>
-                            <h1 class="form-h1" >User KYC Details</h1>
-                                    <p id="full-name"></p>
-                                    <p id="father-name"></p>
-                                    <p id="aadhar-number"></p>
-                                    <p id="phone-number"></p>
-                                    <p id="-location"></p>
-                                    <p id="-gender"></p>
-                                    <p id="-dob"></p>
-                                <br>
-                                    <div class="button-center">
-                                        <button type="submit" class="button-main" onclick="App.getUser()">Search</button>
-                                    </div>    
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="header-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="text-container">
+                                <h1 class="form-h1">Get KYC Details</h1>
+                                <p>Aadhar Number: <input type="text" id="inputaadharnumber" placeholder="Aadhar Number"></p>
+                                <h1 class="form-h1" >User KYC Details</h1>
+                                        <p id="full-name"></p>
+                                        <p id="father-name"></p>
+                                        <p id="aadhar-number"></p>
+                                        <p id="phone-number"></p>
+                                        <p id="-location"></p>
+                                        <p id="-gender"></p>
+                                        <p id="-dob"></p>
+                                    <br>
+                                        <div class="button-center">
+                                            <button type="submit" class="button-main" onclick="App.getDemat()">Search</button>
+                                        </div>    
+                            </div>
                         </div>
-                    </div>
-                </div> <!-- end of row -->
-            </div> <!-- end of container -->
-        </div> <!-- end of header-content -->
-    </header> <!-- end of header -->
-    <!-- end of header -->
+                    </div> <!-- end of row -->
+                </div> <!-- end of container -->
+            </div> <!-- end of header-content -->
+        </header> <!-- end of header -->
+        <!-- end of header -->
     </body>
 </html>
