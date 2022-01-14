@@ -39,18 +39,20 @@
                                 <p>Aadhar Number: <input type="text" id="userAadharNumber" placeholder="Aadhar Number.."></p><br>
                                 <p>Phone Number: <input type="text" id="userPhoneNumber" placeholder="Phone Number.."></p><br>
                                 <p>Location: <input type="text" id="userLocation" placeholder="Location.."></p><br>
+                                
                                 <form>
-                                <label><p>Gender:</p></label>
-                                    <select name="gender">
-                                    <option id="userGender" value="male">Male</option>
-                                    <option id="userGender" value="female">Female</option>
-                                    <option id="userGender" value="others">Others</option>
+                                <p>Gender:</p>
+                                    <select name="gender" id="userGender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="others">Others</option>
                                     </select>
                                 </form><br><br>
-                                <p>Date Of Birth: <input type="text" id="userDOB" placeholder="dd/mm/yyyy"></p><br>
-                            <div class="button-center">
-                                <button type="submit" class="button-main" onclick="App.setUser()">Submit</button>
-                            </div>
+
+                                <p>Date Of Birth: <input type="date" id="userDOB" placeholder="dd/mm/yyyy"></p><br>
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.setUser()">Submit</button>
+                                </div>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
 
@@ -67,13 +69,14 @@
                                         <p id="-gender"></p>
                                         <p id="-dob"></p>
                                     <br>
-                                        <div class="button-center">
-                                            <button type="submit" class="button-main" onclick="App.getUser()">Search</button>
-                                        </div>    
+                                    <div class="button-center">
+                                        <button type="submit" class="button-main" onclick="App.getUser()">Search</button>
+                                    </div>    
                             </div>
+                        </div> 
                     </div> <!-- end of row -->
                 </div> <!-- end of container -->
-            </div> <!-- end of header-content -->
+            </div><!-- end of header-content -->
         </header> <!-- end of header -->
     <!-- end of header -->
     </body>
