@@ -51,16 +51,7 @@ const App = {
             document.getElementById("-location").innerHTML = "Location: " + result[4];
             document.getElementById("-gender").innerHTML =  "Gender: " + result[5];
             document.getElementById("-dob").innerHTML =  "Date Of Birth: " + result[6];
-            
-            /*alert( 
-                    "Full Name: " + result[0] + 
-                    "Father Name: " + result[1] +  
-                    "Aadhar Number: " + result[2] + 
-                    "Phone Number: " + result[3] + 
-                    "Location: " + result[4] + 
-                    "Gender: " + result[5] + 
-                    "Date Of Birth: " + result[6]
-                );*/
+        
         });
         
     },
@@ -78,15 +69,6 @@ const App = {
             document.getElementById("-gender").innerHTML =  "Gender: " + result[5];
             document.getElementById("-dob").innerHTML =  "Date Of Birth: " + result[6];
             
-            /*alert( 
-                    "Full Name: " + result[0] + 
-                    "Father Name: " + result[1] +  
-                    "Aadhar Number: " + result[2] + 
-                    "Phone Number: " + result[3] + 
-                    "Location: " + result[4] + 
-                    "Gender: " + result[5] + 
-                    "Date Of Birth: " + result[6]
-                );*/
         });
         
     },

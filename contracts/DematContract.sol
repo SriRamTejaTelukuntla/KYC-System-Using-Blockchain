@@ -4,7 +4,7 @@ import "./KycContract.sol" ;
 
 contract DematContract 
 {
-    address kycaddress = 0x78469c63d142caC46373D714d896E20Dd46cB506;
+    address kycaddress = 0xce787A0D0AA99F20b4EcB6b3AB35bF7681AFCfc8;
     KycContract user;
 
     constructor ()

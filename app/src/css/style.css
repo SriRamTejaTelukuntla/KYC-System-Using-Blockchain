@@ -9,17 +9,18 @@ body {
 .flex-hero {
     display: flex;
 }
-    /* Place text in the middle of the image */
-    .hero-text {
+
+.hero-text {
     margin-top: 20%;
     text-align: left;
     color: white;
-    }
+}
 
 .hero-img{
     margin-left: 10%;
     margin-top: 10%;
 }
+
 .hero-text-h1 {
     font-size: 80px !important;
     line-height: 90px !important;
@@ -149,10 +150,6 @@ h1{
 }
 
 /*    04. Header     */
-
-.header {
-    /* background-color: #fff; */
-}
 
 .header .header-content {
     padding-top: 2rem;
