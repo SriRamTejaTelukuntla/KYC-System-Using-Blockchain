@@ -88,7 +88,7 @@ const App = {
             });  
         }
         else{
-            document.getElementById("exist").innerHTML = "Aadhar ID Does Not Exists!";
+            document.getElementById("exist").innerHTML = "Aadhar ID does not exists!";
             document.getElementById("full-name").innerHTML =  null;
             document.getElementById("father-name").innerHTML =  null;
             document.getElementById("aadhar-number").innerHTML = null;
@@ -109,13 +109,24 @@ const App = {
         const _gender = document.getElementById('userGender').value;
         const _dob = document.getElementById('userDOB').value;
 
-        console.log(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob,);
-        const gas = await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).estimateGas({
-            from: this.accounts[0]
-        });
-        await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).send({
-            from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
-        });
+        const validate = await this.contractInstance.methods.validateUser(_aadhar_number).call();
+
+        if (!validate){
+            console.log(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob,);
+            const gas = await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).estimateGas({
+                from: this.accounts[0]
+            });
+            await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).send({
+                from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+            });
+            document.getElementById("userConfirmationCheck").innerHTML = "Success!";
+            document.getElementById("userValidateCheck").innerHTML = null;
+        }
+        else{
+            document.getElementById("userConfirmationCheck").innerHTML = null;
+            document.getElementById("userValidateCheck").innerHTML = "Aadhar ID already exists!";
+        }
+        
     },
 
     validateUser: async function() {

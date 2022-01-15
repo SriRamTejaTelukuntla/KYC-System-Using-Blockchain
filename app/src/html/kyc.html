@@ -43,14 +43,16 @@
                                 <form>
                                 <p>Gender:</p>
                                     <select name="gender" id="userGender">
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="others">Others</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Others">Others</option>
                                     </select>
                                 </form><br><br>
 
                                 <p>Date Of Birth: <input type="date" id="userDOB" placeholder="dd/mm/yyyy"></p><br>
                                 <div class="button-center">
+                                    <p id="userValidateCheck"></p>
+                                    <p id="userConfirmationCheck"></p>
                                     <button type="submit" class="button-main" onclick="App.setUser()">Submit</button>
                                 </div>
                             </div> <!-- end of text-container -->
