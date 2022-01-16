@@ -13,7 +13,6 @@ module.exports = {
 
     new CopyWebpackPlugin([{ from: "./src/index.html", to: "index.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/demat.html", to: "html/demat.html" }]),
-    new CopyWebpackPlugin([{ from: "./src/demat.js", to: "demat.js" }]),
     new CopyWebpackPlugin([{ from: "./src/html/kyc.html", to: "html/kyc.html" }]),
     new CopyWebpackPlugin([{ from: "./src/css/bootstrap.css", to: "css/bootstrap.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/style.css", to: "css/style.css" }]),
