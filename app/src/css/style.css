@@ -46,13 +46,7 @@ p {
 
 #verified  {
   text-align: center;
-  font-size: 40px;
-}
-
-#exist {
-  font-size: 20px;
-  text-align: center;
-  color: #db4848;
+  font-size: 25px;
 }
 
 #userConfirmationCheck{
@@ -61,10 +55,11 @@ p {
   color: #2ca132;
 }
 
-#userValidateCheck{
-  font-size: 20px;
+#inputValuesCheck, #userValidateCheck, #exist{
+  font-size: 25px;
   text-align: center;
   color: #db4848;
+  margin-bottom: 25px;
 }
 
 h1 {
