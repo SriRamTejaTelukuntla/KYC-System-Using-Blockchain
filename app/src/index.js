@@ -40,23 +40,8 @@ const App = {
     getUser: async function() {
         
         const _aadhar_number = document.getElementById('inputaadharnumber').value;
-        const validate = await this.contractInstance.methods.validateUser(_aadhar_number).call();
-       
-        if (validate){
-            await this.contractInstance.methods.getUser(_aadhar_number).call().then(function(result){
-                console.log(result)
-                document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
-                document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
-                document.getElementById("aadhar-number").innerHTML = "Aadhar Number: " + result[2];
-                document.getElementById("phone-number").innerHTML =  "Phone Number: " + result[3];
-                document.getElementById("location").innerHTML = "Location: " + result[4];
-                document.getElementById("gender").innerHTML =  "Gender: " + result[5];
-                document.getElementById("dob").innerHTML =  "Date Of Birth: " + result[6];
-                document.getElementById("exist").innerHTML = null;
-            });  
-        }
-        else{
-            document.getElementById("exist").innerHTML = "Aadhar ID Does Not Exists!";
+        if (_aadhar_number.length==0) {
+            document.getElementById("exist").innerHTML = "Enter Aadhar ID!";
             document.getElementById("full-name").innerHTML =  null;
             document.getElementById("father-name").innerHTML =  null;
             document.getElementById("aadhar-number").innerHTML = null;
@@ -64,40 +49,76 @@ const App = {
             document.getElementById("location").innerHTML = null;
             document.getElementById("gender").innerHTML =  null;
             document.getElementById("dob").innerHTML =  null; 
-        }   
-         
-        
+        }
+        else {
+            const validate = await this.contractInstance.methods.validateUser(_aadhar_number).call();
+       
+            if (validate){
+                await this.contractInstance.methods.getUser(_aadhar_number).call().then(function(result){
+                    console.log(result)
+                    document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
+                    document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
+                    document.getElementById("aadhar-number").innerHTML = "Aadhar Number: " + result[2];
+                    document.getElementById("phone-number").innerHTML =  "Phone Number: " + result[3];
+                    document.getElementById("location").innerHTML = "Location: " + result[4];
+                    document.getElementById("gender").innerHTML =  "Gender: " + result[5];
+                    document.getElementById("dob").innerHTML =  "Date Of Birth: " + result[6];
+                    document.getElementById("exist").innerHTML = null;
+                });  
+            }
+            else{
+                document.getElementById("exist").innerHTML = "Aadhar ID Does Not Exists!";
+                document.getElementById("full-name").innerHTML =  null;
+                document.getElementById("father-name").innerHTML =  null;
+                document.getElementById("aadhar-number").innerHTML = null;
+                document.getElementById("phone-number").innerHTML =  null;
+                document.getElementById("location").innerHTML = null;
+                document.getElementById("gender").innerHTML =  null;
+                document.getElementById("dob").innerHTML =  null; 
+            }   
+        } 
     },
 
     getDemat: async function() {
         
         const _aadhar_number = document.getElementById('inputaadharnumber1').value;
-        const validate = await this.contractInstance2.methods.validateUser(_aadhar_number).call();
-       
-        if (validate){
-            await this.contractInstance2.methods.getUserDetails(_aadhar_number).call().then(function(result){
-                console.log(result)
-                document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
-                document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
-                document.getElementById("aadhar-number").innerHTML = "Aadhar Number: " + result[2];
-                document.getElementById("phone-number").innerHTML =  "Phone Number: " + result[3];
-                document.getElementById("location").innerHTML = "Location: " + result[4];
-                document.getElementById("gender").innerHTML =  "Gender: " + result[5];
-                document.getElementById("dob").innerHTML =  "Date Of Birth: " + result[6];
-                document.getElementById("exist").innerHTML = null;
-            });  
-        }
-        else{
-            document.getElementById("exist").innerHTML = "Aadhar ID does not exists!";
+        if (_aadhar_number.length==0) {
+            document.getElementById("exist").innerHTML = "Enter Aadhar ID!";
             document.getElementById("full-name").innerHTML =  null;
             document.getElementById("father-name").innerHTML =  null;
             document.getElementById("aadhar-number").innerHTML = null;
             document.getElementById("phone-number").innerHTML =  null;
             document.getElementById("location").innerHTML = null;
             document.getElementById("gender").innerHTML =  null;
-            document.getElementById("dob").innerHTML =  null; 
-        }  
-        
+            document.getElementById("dob").innerHTML =  null;  
+        }
+        else {
+            const validate = await this.contractInstance2.methods.validateUser(_aadhar_number).call();
+       
+            if (validate){
+                await this.contractInstance2.methods.getUserDetails(_aadhar_number).call().then(function(result){
+                    console.log(result)
+                    document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
+                    document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
+                    document.getElementById("aadhar-number").innerHTML = "Aadhar Number: " + result[2];
+                    document.getElementById("phone-number").innerHTML =  "Phone Number: " + result[3];
+                    document.getElementById("location").innerHTML = "Location: " + result[4];
+                    document.getElementById("gender").innerHTML =  "Gender: " + result[5];
+                    document.getElementById("dob").innerHTML =  "Date Of Birth: " + result[6];
+                    document.getElementById("exist").innerHTML = null;
+                });  
+            }
+            else{
+                document.getElementById("exist").innerHTML = "Aadhar ID does not exists!";
+                document.getElementById("full-name").innerHTML =  null;
+                document.getElementById("father-name").innerHTML =  null;
+                document.getElementById("aadhar-number").innerHTML = null;
+                document.getElementById("phone-number").innerHTML =  null;
+                document.getElementById("location").innerHTML = null;
+                document.getElementById("gender").innerHTML =  null;
+                document.getElementById("dob").innerHTML =  null; 
+            }   
+        } 
     },
 
     setUser: async function() {
@@ -109,40 +130,70 @@ const App = {
         const _gender = document.getElementById('userGender').value;
         const _dob = document.getElementById('userDOB').value;
 
-        const validate = await this.contractInstance.methods.validateUser(_aadhar_number).call();
+        let valuesCheck = false;
+            if (_fullname == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Full Name!";
+            else if (_fathername == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Father Name!";
+            else if (_aadhar_number == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Aadhar Number!";
+            else if (_phone_number.length == 0)
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Phone Number!";
+            else if (_phone_number.length != 10)
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your 10 digit Phone Number!";
+            else if (_location == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Location!";
+            else if (_gender == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Gender!";
+            else if (_dob == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Date of Birth!";
+            else
+                valuesCheck = true;
+        
+        if (valuesCheck){
+            const validate = await this.contractInstance.methods.validateUser(_aadhar_number).call();
 
-        if (!validate){
-            console.log(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob,);
-            const gas = await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).estimateGas({
-                from: this.accounts[0]
-            });
-            await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).send({
-                from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
-            });
-            document.getElementById("userConfirmationCheck").innerHTML = "Success!";
+            if (!validate){
+                console.log(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob,);
+                const gas = await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).estimateGas({
+                    from: this.accounts[0]
+                });
+                await this.contractInstance.methods.setUser(_fullname, _fathername, _aadhar_number, _phone_number, _location, _gender, _dob).send({
+                    from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+                });
+                document.getElementById("userConfirmationCheck").innerHTML = "Success!";
+                document.getElementById("userValidateCheck").innerHTML = null;
+                document.getElementById("inputValuesCheck").innerHTML = null;
+            }
+            else{
+                document.getElementById("userConfirmationCheck").innerHTML = null;
+                document.getElementById("userValidateCheck").innerHTML = "Aadhar ID already exists!";
+                document.getElementById("inputValuesCheck").innerHTML = null;
+            }
+        }
+        else {
+            document.getElementById("userConfirmationCheck").innerHTML = null;
             document.getElementById("userValidateCheck").innerHTML = null;
         }
-        else{
-            document.getElementById("userConfirmationCheck").innerHTML = null;
-            document.getElementById("userValidateCheck").innerHTML = "Aadhar ID already exists!";
-        }
-        
     },
 
     validateUser: async function() {
-        var _aadhar_number = document.getElementById('inputaadharnumber1').value;
-        let result = await this.contractInstance.methods.validateUser(_aadhar_number).call();
-        
-        console.log(result);
-
-            if(result) {
-                document.getElementById("verified").innerHTML = "Verified ✔️";
-            }
-            else {
-                document.getElementById("verified").innerHTML = "Unverified ❌";
-            }
+        var _aadhar_number = document.getElementById('inputaadharnumber2').value;
+        if (_aadhar_number.length==0) {
+            document.getElementById("verified").innerHTML = "Enter Aadhar ID!";
+        }
+        else {
+            let result = await this.contractInstance.methods.validateUser(_aadhar_number).call();
+            console.log(result);
+            
+                if(result) {
+                    document.getElementById("verified").innerHTML = "Verified ✔️";
+                }
+                else {
+                    document.getElementById("verified").innerHTML = "Unverified ❌";
+                }
+        }
     }
-    
 }
 
 window.App = App;
