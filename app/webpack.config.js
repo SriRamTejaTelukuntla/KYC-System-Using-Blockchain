@@ -17,6 +17,7 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src/css/bootstrap.css", to: "css/bootstrap.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/style.css", to: "css/style.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/fontawesome-all.css", to: "css/fontawesome-all.css" }]),
+    new CopyWebpackPlugin([{ from: "./src/images/favicon.png", to: "images/favicon.png" }]),
     new CopyWebpackPlugin([{ from: "./src/images/KYC_Screen-Logo_White.png", to: "images/KYC_Screen-Logo_White.png" }]),
     new CopyWebpackPlugin([{ from: "./src/images/KYC_Screen-Logo_White.webp", to: "images/KYC_Screen-Logo_White.webp" }]),
     new CopyWebpackPlugin([{ from: "./src/images/What-is-KYC-illustration.png", to: "images/What-is-KYC-illustration.png" }]),
