@@ -4,7 +4,6 @@ const Web3 = require('web3');
 const artifact = require('../../build/contracts/KycContract.json');
 const artifact2 = require('../../build/contracts/DematContract.json');
 
-//const netid = await web3.eth.net.getId()
 const deployedContract = artifact.networks[5777];
 const contractAddress = deployedContract.address;
 
@@ -37,6 +36,7 @@ const App = {
         );
     },
 
+    //getting details of user
     getUser: async function() {
         
         const _aadhar_number = document.getElementById('inputaadharnumber').value;
@@ -79,6 +79,7 @@ const App = {
         } 
     },
 
+    //getting details of user at demat end
     getDemat: async function() {
         
         const _aadhar_number = document.getElementById('inputaadharnumber1').value;
@@ -121,6 +122,7 @@ const App = {
         } 
     },
 
+    //setting details of user 
     setUser: async function() {
         const _fullname = document.getElementById('userFullName').value;
         const _fathername = document.getElementById('userFatherName').value;
@@ -177,6 +179,7 @@ const App = {
         }
     },
 
+    //validating user deatils
     validateUser: async function() {
         var _aadhar_number = document.getElementById('inputaadharnumber2').value;
         if (_aadhar_number.length==0) {
