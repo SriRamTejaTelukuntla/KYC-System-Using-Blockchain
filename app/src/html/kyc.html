@@ -40,7 +40,7 @@
                                 <p>Father Name: <input type="text" id="userFatherName" placeholder="Father Name.."></p><br>
                                 <p>Aadhar Number: <input type="text" id="userAadharNumber" placeholder="Aadhar Number.."></p><br>
                                 <p>Phone Number: <input type="text" id="userPhoneNumber" placeholder="Phone Number.."></p><br>
-                                <p>Location: <input type="text" id="userLocation" placeholder="Location.."></p><br>
+                                <p>Address: <input type="text" id="userAddress" placeholder="Address.."></p><br>
                                 
                                 <form>
                                 <p>Gender:</p>
@@ -56,7 +56,7 @@
                                     <p id="userValidateCheck"></p>
                                     <p id="userConfirmationCheck"></p>
                                     <p id="inputValuesCheck"></p>
-                                    <button type="submit" class="button-main" onclick="App.setUser()">Submit</button>
+                                    <button type="submit" class="button-main" onclick="App.setRegisteredUser()">Submit</button>
                                 </div>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
@@ -70,13 +70,13 @@
                                         <p id="father-name"></p>
                                         <p id="aadhar-number"></p>
                                         <p id="phone-number"></p>
-                                        <p id="location"></p>
+                                        <p id="address"></p>
                                         <p id="gender"></p>
                                         <p id="dob"></p>
                                         <p id="exist"></p>
-                                    <div class="button-center">
-                                        <button type="submit" class="button-main" onclick="App.getUser()">Search</button>
-                                    </div>    
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.getRegisteredUser()">Search</button>
+                                </div>    
                             </div>
                         </div> 
                     </div> <!-- end of row -->
