@@ -1,5 +1,6 @@
 // Import Web3 JS library
 const Web3 = require('web3');
+const web3 = new Web3("HTTP://127.0.0.1:7545");
 
 // Import the ABI definition of the DemoContract
 const artifact = require('../../build/contracts/KycContract.json');
@@ -154,22 +155,26 @@ const App = {
         this.contractInstance = new web3.eth.Contract(
             artifact.abi,
             contractAddress
-        );
-        const DonorCount = await this.contractInstance.methods.getCountOfDonors().call();
-        const DonorIDs = await this.contractInstance.methods.getAllDonorIDs().call();
-        let Donor;
 
-        for (let i=0; i<DonorCount; i++) {
-            await this.contractInstance.methods.getDonor(DonorIDs[i]).call().then(function(result) {
+        );
+        const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
+        const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
+        let registeredUser;
+
+        for (let i=0; i<RegisteredUserCount; i++) {
+            await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
                 console.log(result);
-                Donor = [
-                    { Index: i+1, "Full Name": result[0], Age: result[1], Gender: result[2], "Medical ID": DonorIDs[i], "Blood-Type": result[3], Organ: result[4], Weight: result[5], Height: result[6]},
+                registeredUser = [
+                    { 
+                        Index: i+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
+                        "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
+                    },
                 ];
 
-                let data = Object.keys(Donor[0]);
+                let data = Object.keys(registeredUser[0]);
                 if (i==0)
                     generateTableHead(table, data);
-                generateTable(table, Donor);
+                generateTable(table, registeredUser);
             });
         }
     }
