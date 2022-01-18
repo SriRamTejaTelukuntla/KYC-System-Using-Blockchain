@@ -20,11 +20,11 @@
     
 </head>
 
-        <!-- start of navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-            <a id="nav"class="navbar-brand logo-image" href="../index.html"><img src="../images/KYC_Screen-Logo_White.webp" alt="KYC_Screen-Logo_White"></a>
-        </nav>
-        <!-- start of navigation-->
+    <!-- start of navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a id="nav"class="navbar-brand logo-image" href="../index.html"><img src="../images/KYC_Screen-Logo_White.webp" alt="KYC_Screen-Logo_White"></a>
+    </nav>
+    <!-- start of navigation-->
 
     <body>
         <!-- Header -->
@@ -32,16 +32,28 @@
             <div class="header-content">
                 <div class="container">
                     <div class="row">
-                        <div class="row">                                                           
-                            <div class="col-sm-12 col-md-12">   
-                                <h3 class="h3-text">Details of Registered Users</h3>
-                                <div class="table-responsive">
-                                    <table>
-                                        <!-- here goes table generated data! -->
-                                    </table>   
-                                </div>
+                        <div class="col-sm-12 col-md-12">
+                            <h3 class="h3-text">Details of Registered Users</h3>
+                            <div class="table-responsive" id="registered-table">
+                                <table>
+                                    <!-- here goes table generated data! -->
+                                </table>
                             </div>
-                        </div> <!-- end of row -->
+                            <div class="text-container hidden" id="text-hidden">
+                                <h1 class="form-h1">Get KYC Details</h1>
+                                        <p id="display-full-name"></p>
+                                        <p id="display-father-name"></p>
+                                        <p id="display-aadhar-number"></p>
+                                        <p id="display-phone-number"></p>
+                                        <p id="display-address"></p>
+                                        <p id="display-gender"></p>
+                                        <p id="display-dob"></p>
+                                        <p id="display-exist"></p>
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.getVerifiedUser()">Verify</button>
+                                </div>    
+                            </div>
+                        </div>
                     </div> <!-- end of row -->
                 </div> <!-- end of container -->
             </div> <!-- end of header-content -->
