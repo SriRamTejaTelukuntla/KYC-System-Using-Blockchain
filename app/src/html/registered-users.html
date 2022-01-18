@@ -15,7 +15,7 @@
     
     <link rel="icon" href="../images/favicon.png">
 
-    <script src="../index.js"></script>
+    <!-- <script src="../index.js"></script> -->
     <title>KYC System For Demat Account Using Blockchain</title>
     
 </head>
@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="row">                                                           
                             <div class="col-sm-12 col-md-12">   
-                                <h3>Details of Registered Users</h3>
+                                <h3 class="h3-text">Details of Registered Users</h3>
                                 <div class="table-responsive">
                                     <table>
                                         <!-- here goes table generated data! -->
@@ -48,4 +48,8 @@
         </header> <!-- end of header -->
         <!-- end of header -->
     </body>
+    <script src="../index.js"></script>
+    <script>
+        window.onload = App.viewRegisteredUsers();
+    </script>
 </html>
