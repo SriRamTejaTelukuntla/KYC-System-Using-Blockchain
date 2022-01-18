@@ -15,6 +15,7 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src/html/demat.html", to: "html/demat.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/kyc.html", to: "html/kyc.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/registered-users.html", to: "html/registered-users.html" }]),
+    new CopyWebpackPlugin([{ from: "./src/html/verified-users.html", to: "html/verified-users.html" }]),
     new CopyWebpackPlugin([{ from: "./src/css/bootstrap.css", to: "css/bootstrap.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/style.css", to: "css/style.css" }]),
     new CopyWebpackPlugin([{ from: "./src/images/favicon.png", to: "images/favicon.png" }]),
