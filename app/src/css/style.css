@@ -293,3 +293,23 @@ tr:hover {
 .table-responsive {
 overflow-x: auto;
 }
+
+/* i.fa-check-circle {
+  color: #2ecc71;
+  visibility: hidden;
+}
+
+i.fa-exclamation-circle {
+  color: #e74c3c;
+  visibility: hidden;
+}
+
+i.fa-check-circle.success {
+  color: #2ecc71;
+  visibility: visible;
+}
+
+i.fa-exclamation-circle.error {
+  color: #e74c3c;
+  visibility: visible;
+} */

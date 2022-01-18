@@ -34,33 +34,6 @@ function generateTable(table, data) {
 
 let table = document.querySelector("table");
 
-
-document.getElementById('registered-table').addEventListener('click', function (item) {
-    var row = item.path[1];
-    var row_value = [];
-
-    for (var i= 0; i < row.cells.length; i++) {
-        row_value[i] = row.cells[i].innerHTML;
-    }
-    alert(row_value);
-    document.getElementById("display-full-name").innerHTML =  row_value[1];
-    document.getElementById("display-father-name").innerHTML =  row_value[2];
-    document.getElementById("display-aadhar-number").innerHTML = row_value[3];
-    document.getElementById("display-phone-number").innerHTML =  row_value[4];
-    document.getElementById("display-address").innerHTML = row_value[5];
-    document.getElementById("display-gender").innerHTML =  row_value[6];
-    document.getElementById("display-dob").innerHTML =  row_value[7];
-
-    var textcontainer = document.getElementById("text-hidden");
-    textcontainer.className = 'text-container';
-
-    // Toggle the highlight
-/*  if (row.classList.contains('highlight'))
-        row.classList.remove('highlight');
-    else
-        row.classList.add('highlight'); */
-});
-
 const App = {
     web3: null,
     contractInstance: null,
@@ -178,6 +151,7 @@ const App = {
     },
 
     setVerifiedUser: async function () {
+        document.getElementById("display-message").innerHTML = null;
         let _fullname = document.getElementById("display-full-name").innerHTML;
         let _fathername = document.getElementById("display-father-name").innerHTML;
         let _aadhar_number = document.getElementById("display-aadhar-number").innerHTML;
@@ -186,13 +160,24 @@ const App = {
         let _gender = document.getElementById("display-gender").innerHTML;
         let _dob = document.getElementById("display-dob").innerHTML;
 
-        console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob,);
-        const gas = await this.contractInstance.methods.setRegisteredUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
-            from: this.accounts[0]
-        });
-        await this.contractInstance.methods.setRegisteredUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
-            from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
-        });
+        const validate = await this.contractInstance.methods.checkVerifiedUser(_aadhar_number).call();
+        
+        if (!validate) {
+            console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob,);
+            const gas = await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
+                from: this.accounts[0]
+            });
+            await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
+                from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+            });
+            document.getElementById("display-message").innerHTML = "Aadhar ID verified";
+            /* var success = document.getElementsByClassName("i.fa-check-circle");
+            success.className = 'i.fa-check-circle.success'; */
+        } else {
+            document.getElementById("display-message").innerHTML = "Aadhar ID already verified";
+            /* var error = document.getElementsByClassName("i.fa-exclamation-circle");
+            error.className = 'i.fa-check-circle.error'; */
+        }
     },
 
     viewRegisteredUsers: async function(){
@@ -202,6 +187,30 @@ const App = {
             contractAddress
 
         );
+        document.getElementById('registered-table').addEventListener('click', function (item) {
+            var row = item.path[1];
+            var row_value = [];
+        
+            for (var i= 0; i < row.cells.length; i++) {
+                row_value[i] = row.cells[i].innerHTML;
+            }
+            document.getElementById("display-full-name").innerHTML =  row_value[1];
+            document.getElementById("display-father-name").innerHTML =  row_value[2];
+            document.getElementById("display-aadhar-number").innerHTML = row_value[3];
+            document.getElementById("display-phone-number").innerHTML =  row_value[4];
+            document.getElementById("display-address").innerHTML = row_value[5];
+            document.getElementById("display-gender").innerHTML =  row_value[6];
+            document.getElementById("display-dob").innerHTML =  row_value[7];
+        
+            var textcontainer = document.getElementById("text-hidden");
+            textcontainer.className = 'text-container';
+        
+            // Toggle the highlight
+        /*  if (row.classList.contains('highlight'))
+                row.classList.remove('highlight');
+            else
+                row.classList.add('highlight'); */
+        });
         const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
         const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
         let registeredUser;
