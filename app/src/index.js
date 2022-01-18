@@ -34,6 +34,46 @@ function generateTable(table, data) {
 
 let table = document.querySelector("table");
 
+function highlight_row() {
+    var table = document.getElementById('registered-table');
+    var cells = table.getElementsByTagName('td');
+
+    for (var i = 0; i < cells.length; i++) {
+        // Take each cell
+        var cell = cells[i];
+        // do something on onclick event for cell
+        cell.onclick = function () {
+            // Get the row id where the cell exists
+            var rowId = this.parentNode.rowIndex;
+
+            var rowsNotSelected = table.getElementsByTagName('tr');
+            for (var row = 0; row < rowsNotSelected.length; row++) {
+                rowsNotSelected[row].style.backgroundColor = "";
+                rowsNotSelected[row].classList.remove('selected');
+            }
+            var rowSelected = table.getElementsByTagName('tr')[rowId];
+            rowSelected.style.backgroundColor = "#7c99ff";
+            rowSelected.className += " selected";
+
+            var row_value = [];
+            for (var i= 0; i < rowSelected.cells.length; i++) {
+                row_value[i] = rowSelected.cells[i].innerHTML;
+            }
+            console.log("Selected row: "+row_value);
+            document.getElementById("display-full-name").innerHTML =  row_value[1];
+            document.getElementById("display-father-name").innerHTML =  row_value[2];
+            document.getElementById("display-aadhar-number").innerHTML = row_value[3];
+            document.getElementById("display-phone-number").innerHTML =  row_value[4];
+            document.getElementById("display-address").innerHTML = row_value[5];
+            document.getElementById("display-gender").innerHTML =  row_value[6];
+            document.getElementById("display-dob").innerHTML =  row_value[7];
+        
+            var textcontainer = document.getElementById("text-hidden");
+            textcontainer.className = 'text-container';
+        }
+    }
+}
+
 const App = {
     web3: null,
     contractInstance: null,
@@ -54,13 +94,13 @@ const App = {
 
     //setting details of user 
     setRegisteredUser: async function() {
-        const _fullname = document.getElementById('userFullName').value;
-        const _fathername = document.getElementById('userFatherName').value;
-        const _aadhar_number = document.getElementById('userAadharNumber').value;
-        const _phone_number = document.getElementById('userPhoneNumber').value;
-        const _useraddress = document.getElementById('userAddress').value;
-        const _gender = document.getElementById('userGender').value;
-        const _dob = document.getElementById('userDOB').value;
+        const _fullname = document.getElementById('userFullName').value.trim();
+        const _fathername = document.getElementById('userFatherName').value.trim();
+        const _aadhar_number = document.getElementById('userAadharNumber').value.trim();
+        const _phone_number = document.getElementById('userPhoneNumber').value.trim();
+        const _useraddress = document.getElementById('userAddress').value.trim();
+        const _gender = document.getElementById('userGender').value.trim();
+        const _dob = document.getElementById('userDOB').value.trim();
 
         let valuesCheck = false;
             if (_fullname == "")
@@ -110,7 +150,7 @@ const App = {
     },
 
     getRegisteredUser: async function() {
-        const _aadhar_number = document.getElementById('inputaadharnumber').value;
+        const _aadhar_number = document.getElementById('inputaadharnumber').value.trim();
         if (_aadhar_number.length==0) {
             document.getElementById("exist").innerHTML = "Enter Aadhar ID!";
             document.getElementById("full-name").innerHTML =  null;
@@ -187,30 +227,7 @@ const App = {
             contractAddress
 
         );
-        document.getElementById('registered-table').addEventListener('click', function (item) {
-            var row = item.path[1];
-            var row_value = [];
         
-            for (var i= 0; i < row.cells.length; i++) {
-                row_value[i] = row.cells[i].innerHTML;
-            }
-            document.getElementById("display-full-name").innerHTML =  row_value[1];
-            document.getElementById("display-father-name").innerHTML =  row_value[2];
-            document.getElementById("display-aadhar-number").innerHTML = row_value[3];
-            document.getElementById("display-phone-number").innerHTML =  row_value[4];
-            document.getElementById("display-address").innerHTML = row_value[5];
-            document.getElementById("display-gender").innerHTML =  row_value[6];
-            document.getElementById("display-dob").innerHTML =  row_value[7];
-        
-            var textcontainer = document.getElementById("text-hidden");
-            textcontainer.className = 'text-container';
-        
-            // Toggle the highlight
-        /*  if (row.classList.contains('highlight'))
-                row.classList.remove('highlight');
-            else
-                row.classList.add('highlight'); */
-        });
         const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
         const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
         let registeredUser;
@@ -229,6 +246,35 @@ const App = {
                 if (i==0)
                     generateTableHead(table, data);
                 generateTable(table, registeredUser);
+            });
+        }
+        highlight_row();
+    },
+    viewVerifiedUsers: async function(){
+        this.accounts = await web3.eth.getAccounts();
+        this.contractInstance = new web3.eth.Contract(
+            artifact.abi,
+            contractAddress
+        );
+
+        const VerifiedUserCount = await this.contractInstance.methods.getCountOfVerifiedUsers().call();
+        const VerifiedUserIDs = await this.contractInstance.methods.getAllVerifiedIDs().call();
+        let verifiedUser;
+
+        for (let i=0; i<VerifiedUserCount; i++) {
+            await this.contractInstance.methods.getVerifiedUser(VerifiedUserIDs[i]).call().then(function(result) {
+                console.log(result);
+                verifiedUser = [
+                    { 
+                        Index: i+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
+                        "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
+                    },
+                ];
+
+                let data = Object.keys(verifiedUser[0]);
+                if (i==0)
+                    generateTableHead(table, data);
+                generateTable(table, verifiedUser);
             });
         }
     }
