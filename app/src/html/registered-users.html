@@ -33,6 +33,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
+                            <a href="../html/verified-users.html"> <button class="verified-button" >View Verified Users</button> </a>
                             <h3 class="h3-text">Details of Registered Users</h3>
                             <div class="table-responsive" id="registered-table">
                                 <table>
@@ -40,17 +41,18 @@
                                 </table>
                             </div>
                             <div class="text-container hidden" id="text-hidden">
-                                <h1 class="form-h1">Get KYC Details</h1>
-                                        <p id="display-full-name"></p>
-                                        <p id="display-father-name"></p>
-                                        <p id="display-aadhar-number"></p>
-                                        <p id="display-phone-number"></p>
+                                <h1 class="form-h1">Verify User KYC Details</h1>
+                                        <p id="display-full-name" ></p>
+                                        <p id="display-father-name" ></p>
+                                        <p id="display-aadhar-number" ></p>
+                                        <p id="display-phone-number" ></p>
                                         <p id="display-address"></p>
                                         <p id="display-gender"></p>
                                         <p id="display-dob"></p>
-                                        <p id="display-message"></p>
-                                        <i class="fas fa-check-circle" id="display-success"></i>
-                                        <i class="fas fa-exclamation-circle" id="display-error"></i>
+                                        <p id="display-message" ></p>
+                                        <p id="display-message-error"></p>
+                                        <!-- <i class="fas fa-check-circle" id="display-success"></i>
+                                        <i class="fas fa-exclamation-circle" id="display-error"></i> -->
                                 <div class="button-center">
                                     <button type="submit" class="button-main" onclick="App.setVerifiedUser()">Verify</button>
                                 </div>    

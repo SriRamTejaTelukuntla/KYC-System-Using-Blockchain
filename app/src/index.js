@@ -49,10 +49,12 @@ function highlight_row() {
             var rowsNotSelected = table.getElementsByTagName('tr');
             for (var row = 0; row < rowsNotSelected.length; row++) {
                 rowsNotSelected[row].style.backgroundColor = "";
+                rowsNotSelected[row].style.fontWeight = "";
                 rowsNotSelected[row].classList.remove('selected');
             }
             var rowSelected = table.getElementsByTagName('tr')[rowId];
-            rowSelected.style.backgroundColor = "#7c99ff";
+            rowSelected.style.backgroundColor = "#aad7ec";
+            rowSelected.style.fontWeight = 800;
             rowSelected.className += " selected";
 
             var row_value = [];
@@ -214,7 +216,7 @@ const App = {
             /* var success = document.getElementsByClassName("i.fa-check-circle");
             success.className = 'i.fa-check-circle.success'; */
         } else {
-            document.getElementById("display-message").innerHTML = "Aadhar ID already verified";
+            document.getElementById("display-message-error").innerHTML = "Aadhar ID already verified";
             /* var error = document.getElementsByClassName("i.fa-exclamation-circle");
             error.className = 'i.fa-check-circle.error'; */
         }
@@ -250,6 +252,7 @@ const App = {
         }
         highlight_row();
     },
+    
     viewVerifiedUsers: async function(){
         this.accounts = await web3.eth.getAccounts();
         this.contractInstance = new web3.eth.Contract(
@@ -277,6 +280,30 @@ const App = {
                 generateTable(table, verifiedUser);
             });
         }
+    },
+
+    viewVerifiedUserList: async function() {
+        const _aadhar_number = document.getElementById('inputaadharnumber1').value.trim();
+        if (_aadhar_number.length==0) {
+            document.getElementById("exist1").innerHTML = "Enter Aadhar ID!";
+            document.getElementById("display-message").innerHTML = null;
+            document.getElementById("display-message-error").innerHTML = null;
+        }
+        else {
+            const validate = await this.contractInstance.methods.checkRegisteredUser(_aadhar_number).call();
+       
+            if (validate){
+                await this.contractInstance.methods.getVerifiedUser(_aadhar_number).call().then(function(result){
+                    console.log(result)
+                    document.getElementById("display-message").innerHTML = "Aadhar ID verified!";
+                    document.getElementById("display-message-error").innerHTML = null;
+                });  
+            }
+            else{
+                document.getElementById("display-message-error").innerHTML = "Verification is still pending!";
+                document.getElementById("display-message").innerHTML = null;
+            }   
+        } 
     }
 }
 

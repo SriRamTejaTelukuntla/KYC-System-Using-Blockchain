@@ -78,6 +78,16 @@
                                     <button type="submit" class="button-main" onclick="App.getRegisteredUser()">Search</button>
                                 </div>    
                             </div>
+                            <div class="text-container" >
+                                <h1 class="form-h1">Check KYC Status</h1>
+                                <p>Aadhar Number: <input type="text" id="inputaadharnumber1" placeholder="Aadhar Number"></p>
+                                <p id="exist1"></p>
+                                <p id="display-message" class="verify-text"></p>
+                                <p id="display-message-error" class="verify-text"></p>
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.viewVerifiedUserList()">Verify</button>
+                                </div>    
+                            </div>
                         </div> 
                     </div> <!-- end of row -->
                 </div> <!-- end of container -->
