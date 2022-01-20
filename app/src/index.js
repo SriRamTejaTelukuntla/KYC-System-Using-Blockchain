@@ -243,7 +243,7 @@ const App = {
             });
         }
         if (!tableCreated) {
-           document.getElementById("register-table-message").innerHTML = "No registered users found";
+           document.getElementById("register-table-message").innerHTML = "No registered users found!";
         }
     },
     
@@ -285,7 +285,7 @@ const App = {
         if (tableCreated) {
             selectRow();
         } else {
-            document.getElementById("pending-table-message").innerHTML = "No pending users found";
+            document.getElementById("pending-table-message").innerHTML = "No pending users found!";
         }
     },
 

@@ -340,6 +340,10 @@ tr:hover {
 overflow-x: auto;
 }
 
+#pending-table-message, #register-table-message{
+  color: white;
+}
+
 /* i.fa-check-circle {
   color: #2ecc71;
   visibility: hidden;
