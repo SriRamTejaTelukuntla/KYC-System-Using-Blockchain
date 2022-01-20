@@ -69,6 +69,7 @@ function selectRow() {
             document.getElementById("display-address").innerHTML = row_value[5];
             document.getElementById("display-gender").innerHTML =  row_value[6];
             document.getElementById("display-dob").innerHTML =  row_value[7];
+            document.getElementById("display-message").innerHTML = null;
         
             var textcontainer = document.getElementById("text-hidden");
             textcontainer.className = 'text-container';
@@ -260,11 +261,11 @@ const App = {
         console.log(RegisteredUserIDs);
         
         let tableCreated = false;
+        let j = 0;
         for (let i=0; i<RegisteredUserCount; i++) {
             var validate = await this.contractInstance.methods.checkVerifiedUser(RegisteredUserIDs[i]).call();
             if (!validate) {
                 tableCreated = true;
-                let j = 0;
                 await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
                     console.log(result);
                     registeredUser = [
@@ -278,8 +279,8 @@ const App = {
                     if (j==0)
                         generateTableHead(table, data);
                     generateTable(table, registeredUser);
-                    j++
                 });
+                j++;
             }
         }
         if (tableCreated) {
