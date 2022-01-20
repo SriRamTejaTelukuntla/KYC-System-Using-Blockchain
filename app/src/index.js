@@ -34,8 +34,8 @@ function generateTable(table, data) {
 
 let table = document.querySelector("table");
 
-function highlight_row() {
-    var table = document.getElementById('registered-table');
+function selectRow() {
+    var table = document.getElementById('pending-table');
     var cells = table.getElementsByTagName('td');
 
     for (var i = 0; i < cells.length; i++) {
@@ -202,24 +202,14 @@ const App = {
         let _gender = document.getElementById("display-gender").innerHTML;
         let _dob = document.getElementById("display-dob").innerHTML;
 
-        const validate = await this.contractInstance.methods.checkVerifiedUser(_aadhar_number).call();
-        
-        if (!validate) {
-            console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob,);
-            const gas = await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
-                from: this.accounts[0]
-            });
-            await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
-                from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
-            });
-            document.getElementById("display-message").innerHTML = "Aadhar ID verified";
-            /* var success = document.getElementsByClassName("i.fa-check-circle");
-            success.className = 'i.fa-check-circle.success'; */
-        } else {
-            document.getElementById("display-message-error").innerHTML = "Aadhar ID already verified";
-            /* var error = document.getElementsByClassName("i.fa-exclamation-circle");
-            error.className = 'i.fa-check-circle.error'; */
-        }
+        console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob);
+        const gas = await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
+            from: this.accounts[0]
+        });
+        await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
+            from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+        });
+        document.getElementById("display-message").innerHTML = "User verified";
     },
 
     viewRegisteredUsers: async function(){
@@ -234,7 +224,9 @@ const App = {
         const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
         let registeredUser;
 
+        let tableCreated = false;
         for (let i=0; i<RegisteredUserCount; i++) {
+            tableCreated = true;
             await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
                 console.log(result);
                 registeredUser = [
@@ -250,9 +242,53 @@ const App = {
                 generateTable(table, registeredUser);
             });
         }
-        highlight_row();
+        if (!tableCreated) {
+           document.getElementById("register-table-message").innerHTML = "No registered users found";
+        }
     },
     
+    viewPendingUsers: async function(){
+        this.accounts = await web3.eth.getAccounts();
+        this.contractInstance = new web3.eth.Contract(
+            artifact.abi,
+            contractAddress
+        );
+        
+        const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
+        const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
+        let registeredUser;
+        console.log(RegisteredUserIDs);
+        
+        let tableCreated = false;
+        for (let i=0; i<RegisteredUserCount; i++) {
+            var validate = await this.contractInstance.methods.checkVerifiedUser(RegisteredUserIDs[i]).call();
+            if (!validate) {
+                tableCreated = true;
+                let j = 0;
+                await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
+                    console.log(result);
+                    registeredUser = [
+                        { 
+                            Index: j+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
+                            "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
+                        },
+                    ];
+    
+                    let data = Object.keys(registeredUser[0]);
+                    if (j==0)
+                        generateTableHead(table, data);
+                    generateTable(table, registeredUser);
+                    j++
+                });
+            }
+        }
+        if (tableCreated) {
+            selectRow();
+        } else {
+            document.getElementById("pending-table-message").innerHTML = "No pending users found";
+        }
+    },
+
     viewVerifiedUsers: async function(){
         this.accounts = await web3.eth.getAccounts();
         this.contractInstance = new web3.eth.Contract(
