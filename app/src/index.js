@@ -320,25 +320,27 @@ const App = {
     },
 
     viewVerifiedUserList: async function() {
-        const _aadhar_number = document.getElementById('inputaadharnumber1').value.trim();
+        const _aadhar_number = document.getElementById('checkinputaadharnumber').value.trim();
         if (_aadhar_number.length==0) {
             document.getElementById("exist1").innerHTML = "Enter Aadhar ID!";
             document.getElementById("display-message").innerHTML = null;
             document.getElementById("display-message-error").innerHTML = null;
         }
         else {
-            const validate = await this.contractInstance.methods.checkRegisteredUser(_aadhar_number).call();
+            const validate = await this.contractInstance.methods.checkVerifiedUser(_aadhar_number).call();
        
             if (validate){
                 await this.contractInstance.methods.getVerifiedUser(_aadhar_number).call().then(function(result){
                     console.log(result)
                     document.getElementById("display-message").innerHTML = "Aadhar ID verified!";
                     document.getElementById("display-message-error").innerHTML = null;
+                    document.getElementById("exist1").innerHTML = null;
                 });  
             }
             else{
                 document.getElementById("display-message-error").innerHTML = "Verification is still pending!";
                 document.getElementById("display-message").innerHTML = null;
+                document.getElementById("exist1").innerHTML = null;
             }   
         } 
     }
