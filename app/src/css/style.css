@@ -340,7 +340,7 @@ tr:hover {
 overflow-x: auto;
 }
 
-#pending-table-message, #register-table-message{
+#pending-table-message, #register-table-message, #verified-table-message{
   color: white;
 }
 
