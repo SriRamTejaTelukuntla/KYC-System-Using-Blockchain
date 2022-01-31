@@ -266,18 +266,6 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* .text-container-verify{
-  width: 50% !important;
-  margin-top: 1.5rem;
-  margin-bottom: 6rem;
-  margin-right: 1rem;
-  padding: 40px 40px 40px 40px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.123);
-  visibility: hidden;
-} */
-
 #text-hidden{
   width: 50%;
 }
@@ -343,23 +331,3 @@ overflow-x: auto;
 #pending-table-message, #register-table-message, #verified-table-message{
   color: white;
 }
-
-/* i.fa-check-circle {
-  color: #2ecc71;
-  visibility: hidden;
-}
-
-i.fa-exclamation-circle {
-  color: #e74c3c;
-  visibility: hidden;
-}
-
-i.fa-check-circle.success {
-  color: #2ecc71;
-  visibility: visible;
-}
-
-i.fa-exclamation-circle.error {
-  color: #e74c3c;
-  visibility: visible;
-} */
