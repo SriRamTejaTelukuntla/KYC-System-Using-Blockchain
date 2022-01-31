@@ -301,7 +301,9 @@ const App = {
         const VerifiedUserIDs = await this.contractInstance.methods.getAllVerifiedIDs().call();
         let verifiedUser;
 
+        let tableCreated = false;
         for (let i=0; i<VerifiedUserCount; i++) {
+            tableCreated = true;
             await this.contractInstance.methods.getVerifiedUser(VerifiedUserIDs[i]).call().then(function(result) {
                 console.log(result);
                 verifiedUser = [
@@ -317,6 +319,9 @@ const App = {
                 generateTable(table, verifiedUser);
             });
         }
+        if (!tableCreated) {
+            document.getElementById("verified-table-message").innerHTML = "No verified users found!";
+         }
     },
 
     viewVerifiedUserList: async function() {
