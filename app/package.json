@@ -1,13 +1,13 @@
 {
-  "name": "app",
+  "name": "KYC-System-On-Blockchain",
   "version": "1.0.0",
-  "description": "Test webapp with web3",
+  "description": "Get KYC done faster, easier and safer",
   "main": "src/index.js",
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
-  "author": "Selva",
+  "author": "Sri Ram Teja Telukuntla, Nikhil Cholkar, Rohit Nadkuda, GopalaKrishna Madamashetti",
   "license": "MIT",
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.5",
