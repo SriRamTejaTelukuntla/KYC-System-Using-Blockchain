@@ -12,7 +12,7 @@
     <link rel="icon" href="../images/favicon.png">
 
     <script src="../index.js"></script>
-    <title>KYC System For Demat Account Using Blockchain</title>
+    <title>KYC Register Form - Bank</title>
     
 </head>
 
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="text-container">
-                                <h1 class="form-h1">Enter KYC Details</h1>
+                                <h1 class="form-h1">Enter Aadhar Details</h1>
 
                                 <p>Full Name: <input type="text" id="userFullName" placeholder="Full Name.."></p><br>
                                 <p>Father Name: <input type="text" id="userFatherName" placeholder="Father Name.."></p><br>
@@ -52,7 +52,7 @@
                                     <p id="userValidateCheck"></p>
                                     <p id="userConfirmationCheck"></p>
                                     <p id="inputValuesCheck"></p>
-                                    <button type="submit" class="button-main" onclick="App.setRegisteredUser()">Submit</button>
+                                    <button type="submit" class="button-main" onclick="App.setRegisteredBankUser()">Submit</button>
                                 </div>
                             </div> <!-- end of text-container -->
                         </div> <!-- end of col -->
@@ -71,7 +71,7 @@
                                         <p id="dob"></p>
                                         <p id="exist"></p>
                                 <div class="button-center">
-                                    <button type="submit" class="button-main" onclick="App.getRegisteredUser()">Search</button>
+                                    <button type="submit" class="button-main" onclick="App.getRegisteredBankUser()">Search</button>
                                 </div>    
                             </div>
                             <div class="text-container" >
@@ -81,7 +81,7 @@
                                 <p id="display-message" class="verify-text"></p>
                                 <p id="display-message-error" class="verify-text"></p>
                                 <div class="button-center">
-                                    <button type="submit" class="button-main" onclick="App.viewVerifiedUserList()">Check</button>
+                                    <button type="submit" class="button-main" onclick="App.viewVerifiedBankUserList()">Check</button>
                                 </div>    
                             </div>
                         </div> 
