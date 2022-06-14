@@ -13,7 +13,7 @@
     <link rel="icon" href="../images/favicon.png">
 
     <!-- <script src="../index.js"></script> -->
-    <title>KYC System For Demat Account Using Blockchain</title>
+    <title>KYC Pending Users - Bank</title>
     
 </head>
 
@@ -48,7 +48,7 @@
                                         <label>DOB:&nbsp;</label><p id="display-dob"></p><br>
                                         <p id="display-message" ></p>
                                 <div class="button-center">
-                                    <button type="submit" class="button-main" onclick="App.setVerifiedUser()">Verify</button>
+                                    <button type="submit" class="button-main" onclick="App.setVerifiedBankUser()">Verify</button>
                                 </div>    
                             </div>
                         </div>
@@ -60,6 +60,6 @@
     </body>
     <script src="../index.js"></script>
     <script>
-        window.onload = App.viewPendingUsers();
+        window.onload = App.viewPendingBankUsers();
     </script>
 </html>
