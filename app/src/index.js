@@ -96,7 +96,7 @@ const App = {
     },
 
     //setting details of user 
-    setRegisteredUser: async function() {
+    setRegisteredBankUser: async function() {
         const _fullname = document.getElementById('userFullName').value.trim();
         const _fathername = document.getElementById('userFatherName').value.trim();
         const _aadhar_number = document.getElementById('userAadharNumber').value.trim();
@@ -126,14 +126,14 @@ const App = {
                 valuesCheck = true;
         
         if (valuesCheck){
-            const validate = await this.contractInstance.methods.checkRegisteredUser(_aadhar_number).call();
+            const validate = await this.contractInstance.methods.checkRegisteredBankUser(_aadhar_number).call();
 
             if (!validate){
                 console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob,);
-                const gas = await this.contractInstance.methods.setRegisteredUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
+                const gas = await this.contractInstance.methods.setRegisteredBankUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
                     from: this.accounts[0]
                 });
-                await this.contractInstance.methods.setRegisteredUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
+                await this.contractInstance.methods.setRegisteredBankUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
                     from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
                 });
                 document.getElementById("userConfirmationCheck").innerHTML = "Success!";
@@ -152,7 +152,7 @@ const App = {
         }
     },
 
-    getRegisteredUser: async function() {
+    getRegisteredBankUser: async function() {
         const _aadhar_number = document.getElementById('inputaadharnumber').value.trim();
         if (_aadhar_number.length==0) {
             document.getElementById("exist").innerHTML = "Enter Aadhar ID!";
@@ -165,10 +165,10 @@ const App = {
             document.getElementById("dob").innerHTML =  null; 
         }
         else {
-            const validate = await this.contractInstance.methods.checkRegisteredUser(_aadhar_number).call();
+            const validate = await this.contractInstance.methods.checkRegisteredBankUser(_aadhar_number).call();
        
             if (validate){
-                await this.contractInstance.methods.getRegisteredUser(_aadhar_number).call().then(function(result){
+                await this.contractInstance.methods.getRegisteredBankUser(_aadhar_number).call().then(function(result){
                     console.log(result)
                     document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
                     document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
@@ -193,7 +193,7 @@ const App = {
         } 
     },
 
-    setVerifiedUser: async function () {
+    setVerifiedBankUser: async function () {
         document.getElementById("display-message").innerHTML = null;
         let _fullname = document.getElementById("display-full-name").innerHTML;
         let _fathername = document.getElementById("display-father-name").innerHTML;
@@ -204,16 +204,16 @@ const App = {
         let _dob = document.getElementById("display-dob").innerHTML;
 
         console.log(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob);
-        const gas = await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
+        const gas = await this.contractInstance.methods.setVerifiedBankUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).estimateGas({
             from: this.accounts[0]
         });
-        await this.contractInstance.methods.setVerifiedUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
+        await this.contractInstance.methods.setVerifiedBankUser(_fullname, _fathername, _aadhar_number, _phone_number, _useraddress, _gender, _dob).send({
             from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
         });
         document.getElementById("display-message").innerHTML = "User verified";
     },
 
-    viewRegisteredUsers: async function(){
+    viewRegisteredBankUsers: async function(){
         this.accounts = await web3.eth.getAccounts();
         this.contractInstance = new web3.eth.Contract(
             artifact.abi,
@@ -221,26 +221,26 @@ const App = {
 
         );
         
-        const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
-        const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
-        let registeredUser;
+        const RegisteredBankUserCount = await this.contractInstance.methods.getCountOfRegisteredBankUsers().call();
+        const RegisteredBankUserIDs = await this.contractInstance.methods.getAllRegisteredBankUsersIDs().call();
+        let registeredBankUser;
 
         let tableCreated = false;
-        for (let i=0; i<RegisteredUserCount; i++) {
+        for (let i=0; i<RegisteredBankUserCount; i++) {
             tableCreated = true;
-            await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
+            await this.contractInstance.methods.getRegisteredBankUser(RegisteredBankUserIDs[i]).call().then(function(result) {
                 console.log(result);
-                registeredUser = [
+                registeredBankUser = [
                     { 
                         Index: i+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
                         "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
                     },
                 ];
 
-                let data = Object.keys(registeredUser[0]);
+                let data = Object.keys(registeredBankUser[0]);
                 if (i==0)
                     generateTableHead(table, data);
-                generateTable(table, registeredUser);
+                generateTable(table, registeredBankUser);
             });
         }
         if (!tableCreated) {
@@ -248,37 +248,37 @@ const App = {
         }
     },
     
-    viewPendingUsers: async function(){
+    viewPendingBankUsers: async function(){
         this.accounts = await web3.eth.getAccounts();
         this.contractInstance = new web3.eth.Contract(
             artifact.abi,
             contractAddress
         );
         
-        const RegisteredUserCount = await this.contractInstance.methods.getCountOfRegisteredUsers().call();
-        const RegisteredUserIDs = await this.contractInstance.methods.getAllRegisteredIDs().call();
-        let registeredUser;
-        console.log(RegisteredUserIDs);
+        const RegisteredBankUserCount = await this.contractInstance.methods.getCountOfRegisteredBankUsers().call();
+        const RegisteredBankUserIDs = await this.contractInstance.methods.getAllRegisteredBankUsersIDs().call();
+        let registeredBankUser;
+        console.log(RegisteredBankUserIDs);
         
         let tableCreated = false;
         let j = 0;
-        for (let i=0; i<RegisteredUserCount; i++) {
-            var validate = await this.contractInstance.methods.checkVerifiedUser(RegisteredUserIDs[i]).call();
+        for (let i=0; i<RegisteredBankUserCount; i++) {
+            var validate = await this.contractInstance.methods.checkVerifiedBankUser(RegisteredBankUserIDs[i]).call();
             if (!validate) {
                 tableCreated = true;
-                await this.contractInstance.methods.getRegisteredUser(RegisteredUserIDs[i]).call().then(function(result) {
+                await this.contractInstance.methods.getRegisteredBankUser(RegisteredBankUserIDs[i]).call().then(function(result) {
                     console.log(result);
-                    registeredUser = [
+                    registeredBankUser = [
                         { 
                             Index: j+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
                             "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
                         },
                     ];
     
-                    let data = Object.keys(registeredUser[0]);
+                    let data = Object.keys(registeredBankUser[0]);
                     if (j==0)
                         generateTableHead(table, data);
-                    generateTable(table, registeredUser);
+                    generateTable(table, registeredBankUser);
                 });
                 j++;
             }
@@ -290,33 +290,33 @@ const App = {
         }
     },
 
-    viewVerifiedUsers: async function(){
+    viewVerifiedBankUsers: async function(){
         this.accounts = await web3.eth.getAccounts();
         this.contractInstance = new web3.eth.Contract(
             artifact.abi,
             contractAddress
         );
 
-        const VerifiedUserCount = await this.contractInstance.methods.getCountOfVerifiedUsers().call();
-        const VerifiedUserIDs = await this.contractInstance.methods.getAllVerifiedIDs().call();
-        let verifiedUser;
+        const VerifiedBankUserCount = await this.contractInstance.methods.getCountOfVerifiedBankUsers().call();
+        const VerifiedBankUserIDs = await this.contractInstance.methods.getAllVerifiedBankUsersIDs().call();
+        let verifiedBankUser;
 
         let tableCreated = false;
-        for (let i=0; i<VerifiedUserCount; i++) {
+        for (let i=0; i<VerifiedBankUserCount; i++) {
             tableCreated = true;
-            await this.contractInstance.methods.getVerifiedUser(VerifiedUserIDs[i]).call().then(function(result) {
+            await this.contractInstance.methods.getVerifiedBankUser(VerifiedBankUserIDs[i]).call().then(function(result) {
                 console.log(result);
-                verifiedUser = [
+                verifiedBankUser = [
                     { 
                         Index: i+1, "Full Name": result[0], "Father Name": result[1], "Aadhar Number": result[2], "Phone Number": result[3], 
                         "Address": result[4], Gender: result[5], "Date Of Birth": result[6]
                     },
                 ];
 
-                let data = Object.keys(verifiedUser[0]);
+                let data = Object.keys(verifiedBankUser[0]);
                 if (i==0)
                     generateTableHead(table, data);
-                generateTable(table, verifiedUser);
+                generateTable(table, verifiedBankUser);
             });
         }
         if (!tableCreated) {
@@ -324,7 +324,7 @@ const App = {
          }
     },
 
-    viewVerifiedUserList: async function() {
+    viewVerifiedBankUserList: async function() {
         const _aadhar_number = document.getElementById('checkinputaadharnumber').value.trim();
         if (_aadhar_number.length==0) {
             document.getElementById("exist1").innerHTML = "Enter Aadhar ID!";
@@ -332,10 +332,10 @@ const App = {
             document.getElementById("display-message-error").innerHTML = null;
         }
         else {
-            const validate = await this.contractInstance.methods.checkVerifiedUser(_aadhar_number).call();
+            const validate = await this.contractInstance.methods.checkVerifiedBankUser(_aadhar_number).call();
        
             if (validate){
-                await this.contractInstance.methods.getVerifiedUser(_aadhar_number).call().then(function(result){
+                await this.contractInstance.methods.getVerifiedBankUser(_aadhar_number).call().then(function(result){
                     console.log(result)
                     document.getElementById("display-message").innerHTML = "Aadhar ID verified!";
                     document.getElementById("display-message-error").innerHTML = null;
