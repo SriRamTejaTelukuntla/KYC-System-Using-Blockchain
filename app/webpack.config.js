@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
 
     new CopyWebpackPlugin([{ from: "./src/index.html", to: "index.html" }]),
-    new CopyWebpackPlugin([{ from: "./src/html/kyc.html", to: "html/kyc.html" }]),
+    new CopyWebpackPlugin([{ from: "./src/html/bank-kyc.html", to: "html/bank-kyc.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/registered-users.html", to: "html/registered-users.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/pending-users.html", to: "html/pending-users.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/verified-users.html", to: "html/verified-users.html" }]),
