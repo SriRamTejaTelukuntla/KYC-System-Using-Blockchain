@@ -34,7 +34,7 @@ function generateTable(table, data) {
 
 let table = document.querySelector("table");
 
-function selectRow() {
+function selectRowBank() {
     var table = document.getElementById('pending-table');
     var cells = table.getElementsByTagName('td');
 
@@ -77,6 +77,47 @@ function selectRow() {
     }
 }
 
+function selectRowDemat() {
+    var table = document.getElementById('pending-table');
+    var cells = table.getElementsByTagName('td');
+
+    for (var i = 0; i < cells.length; i++) {
+        // Take each cell
+        var cell = cells[i];
+        // do something on onclick event for cell
+        cell.onclick = function () {
+            // Get the row id where the cell exists
+            var rowId = this.parentNode.rowIndex;
+
+            var rowsNotSelected = table.getElementsByTagName('tr');
+            for (var row = 0; row < rowsNotSelected.length; row++) {
+                rowsNotSelected[row].style.backgroundColor = "";
+                rowsNotSelected[row].style.fontWeight = "";
+                rowsNotSelected[row].classList.remove('selected');
+            }
+            var rowSelected = table.getElementsByTagName('tr')[rowId];
+            rowSelected.style.backgroundColor = "#aad7ec";
+            rowSelected.style.fontWeight = 800;
+            rowSelected.className += " selected";
+
+            var row_value = [];
+            for (var i= 0; i < rowSelected.cells.length; i++) {
+                row_value[i] = rowSelected.cells[i].innerHTML;
+            }
+            console.log("Selected row: "+row_value);
+            document.getElementById("display-full-name").innerHTML =  row_value[1];
+            document.getElementById("display-father-name").innerHTML =  row_value[2];
+            document.getElementById("display-pan-number").innerHTML = row_value[3];
+            document.getElementById("display-phone-number").innerHTML =  row_value[4];
+            document.getElementById("display-dob").innerHTML =  row_value[5];
+            document.getElementById("display-message").innerHTML = null;
+        
+            var textcontainer = document.getElementById("text-hidden");
+            textcontainer.className = 'text-container';
+        }
+    }
+}
+
 const App = {
     web3: null,
     contractInstance: null,
@@ -95,7 +136,7 @@ const App = {
         );
     },
 
-    //setting details of user 
+    //setting details of user for bank 
     setRegisteredBankUser: async function() {
         const _fullname = document.getElementById('userFullName').value.trim();
         const _fathername = document.getElementById('userFatherName').value.trim();
@@ -284,7 +325,7 @@ const App = {
             }
         }
         if (tableCreated) {
-            selectRow();
+            selectRowBank();
         } else {
             document.getElementById("pending-table-message").innerHTML = "No pending users found!";
         }
@@ -348,7 +389,245 @@ const App = {
                 document.getElementById("exist1").innerHTML = null;
             }   
         } 
-    }
+    },
+
+    //setting details of user for demat 
+    setRegisteredDematUser: async function() {
+        const _fullname = document.getElementById('userFullName').value.trim();
+        const _fathername = document.getElementById('userFatherName').value.trim();
+        const _pan_number = document.getElementById('userPanNumber').value.trim();
+        const _phone_number = document.getElementById('userPhoneNumber').value.trim();
+        const _dob = document.getElementById('userDOB').value.trim();
+
+        let valuesCheck = false;
+            if (_fullname == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Full Name!";
+            else if (_fathername == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Father Name!";
+            else if (_pan_number == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Pan Number!";
+            else if (_phone_number.length == 0)
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Phone Number!";
+            else if (_phone_number.length != 10)
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your 10 digit Phone Number!";
+            else if (_dob == "")
+                document.getElementById("inputValuesCheck").innerHTML = "Enter your Date of Birth!";
+            else
+                valuesCheck = true;
+        
+        if (valuesCheck){
+            const validate = await this.contractInstance.methods.checkRegisteredDematUser(_pan_number).call();
+
+            if (!validate){
+                console.log(_fullname, _fathername, _pan_number, _phone_number, _dob);
+                const gas = await this.contractInstance.methods.setRegisteredDematUser(_fullname, _fathername, _pan_number, _phone_number, _dob).estimateGas({
+                    from: this.accounts[0]
+                });
+                await this.contractInstance.methods.setRegisteredDematUser(_fullname, _fathername, _pan_number, _phone_number, _dob).send({
+                    from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+                }); 
+                document.getElementById("userConfirmationCheck").innerHTML = "Success!";
+                document.getElementById("userValidateCheck").innerHTML = null;
+                document.getElementById("inputValuesCheck").innerHTML = null;
+            }
+            else{
+                document.getElementById("userConfirmationCheck").innerHTML = null;
+                document.getElementById("userValidateCheck").innerHTML = "Pan ID already exists!";
+                document.getElementById("inputValuesCheck").innerHTML = null;
+            }
+        }
+        else {
+            document.getElementById("userConfirmationCheck").innerHTML = null;
+            document.getElementById("userValidateCheck").innerHTML = null;
+        }
+    },
+
+    getRegisteredDematUser: async function() {
+        const _pan_number = document.getElementById('inputpannumber').value.trim();
+        if (_pan_number.length==0) {
+            document.getElementById("exist").innerHTML = "Enter Pan ID!";
+            document.getElementById("full-name").innerHTML =  null;
+            document.getElementById("father-name").innerHTML =  null;
+            document.getElementById("pan-number").innerHTML = null;
+            document.getElementById("phone-number").innerHTML =  null;
+            document.getElementById("dob").innerHTML =  null; 
+        }
+        else {
+            const validate = await this.contractInstance.methods.checkRegisteredDematUser(_pan_number).call();
+       
+            if (validate){
+                await this.contractInstance.methods.getRegisteredDematUser(_pan_number).call().then(function(result){
+                    console.log(result)
+                    document.getElementById("full-name").innerHTML = "Full Name: " + result[0];
+                    document.getElementById("father-name").innerHTML =  "Father Name: " + result[1];
+                    document.getElementById("pan-number").innerHTML = "Pan Number: " + result[2];
+                    document.getElementById("phone-number").innerHTML =  "Phone Number: " + result[3];
+                    document.getElementById("dob").innerHTML =  "Date Of Birth: " + result[4];
+                    document.getElementById("exist").innerHTML = null;
+                });  
+            }
+            else{
+                document.getElementById("exist").innerHTML = "Pan ID Does Not Exists!";
+                document.getElementById("full-name").innerHTML =  null;
+                document.getElementById("father-name").innerHTML =  null;
+                document.getElementById("pan-number").innerHTML = null;
+                document.getElementById("phone-number").innerHTML =  null;
+                document.getElementById("dob").innerHTML =  null;
+            }   
+        } 
+    },
+
+    setVerifiedDematUser: async function () {
+        document.getElementById("display-message").innerHTML = null;
+        let _fullname = document.getElementById("display-full-name").innerHTML;
+        let _fathername = document.getElementById("display-father-name").innerHTML;
+        let _pan_number = document.getElementById("display-pan-number").innerHTML;
+        let _phone_number = document.getElementById("display-phone-number").innerHTML;
+        let _dob = document.getElementById("display-dob").innerHTML;
+
+        console.log(_fullname, _fathername, _pan_number, _phone_number, _dob);
+        const gas = await this.contractInstance.methods.setVerifiedDematUser(_fullname, _fathername, _pan_number, _phone_number, _dob).estimateGas({
+            from: this.accounts[0]
+        });
+        await this.contractInstance.methods.setVerifiedDematUser(_fullname, _fathername, _pan_number, _phone_number, _dob).send({
+            from: this.accounts[0], gas: Math.max(gas, MIN_GAS)
+        });
+        document.getElementById("display-message").innerHTML = "User verified";
+    },
+
+    viewRegisteredDematUsers: async function(){
+        this.accounts = await web3.eth.getAccounts();
+        this.contractInstance = new web3.eth.Contract(
+            artifact.abi,
+            contractAddress
+
+        );
+        
+        const RegisteredDematUserCount = await this.contractInstance.methods.getCountOfRegisteredDematUsers().call();
+        const RegisteredDematUserIDs = await this.contractInstance.methods.getAllRegisteredDematUsersIDs().call();
+        let registeredDematUser;
+
+        let tableCreated = false;
+        for (let i=0; i<RegisteredDematUserCount; i++) {
+            tableCreated = true;
+            await this.contractInstance.methods.getRegisteredDematUser(RegisteredDematUserIDs[i]).call().then(function(result) {
+                console.log(result);
+                registeredDematUser = [
+                    { 
+                        Index: i+1, "Full Name": result[0], "Father Name": result[1], "Pan Number": result[2], "Phone Number": result[3], "Date Of Birth": result[4]
+                    },
+                ];
+
+                let data = Object.keys(registeredDematUser[0]);
+                if (i==0)
+                    generateTableHead(table, data);
+                generateTable(table, registeredDematUser);
+            });
+        }
+        if (!tableCreated) {
+           document.getElementById("register-table-message").innerHTML = "No registered users found!";
+        }
+    },
+
+    viewPendingDematUsers: async function(){
+        this.accounts = await web3.eth.getAccounts();
+        this.contractInstance = new web3.eth.Contract(
+            artifact.abi,
+            contractAddress
+        );
+        
+        const RegisteredDematUserCount = await this.contractInstance.methods.getCountOfRegisteredDematUsers().call();
+        const RegisteredDematUserIDs = await this.contractInstance.methods.getAllRegisteredDematUsersIDs().call();
+        let registeredDematUser;
+        console.log(RegisteredDematUserIDs);
+        
+        let tableCreated = false;
+        let j = 0;
+        for (let i=0; i<RegisteredDematUserCount; i++) {
+            var validate = await this.contractInstance.methods.checkVerifiedDematUser(RegisteredDematUserIDs[i]).call();
+            if (!validate) {
+                tableCreated = true;
+                await this.contractInstance.methods.getRegisteredDematUser(RegisteredDematUserIDs[i]).call().then(function(result) {
+                    console.log(result);
+                    registeredDematUser = [
+                        { 
+                            Index: j+1, "Full Name": result[0], "Father Name": result[1], "Pan Number": result[2], "Phone Number": result[3], "Date Of Birth": result[4]
+                        },
+                    ];
+    
+                    let data = Object.keys(registeredDematUser[0]);
+                    if (j==0)
+                        generateTableHead(table, data);
+                    generateTable(table, registeredDematUser);
+                });
+                j++;
+            }
+        }
+        if (tableCreated) {
+            selectRowDemat();
+        } else {
+            document.getElementById("pending-table-message").innerHTML = "No pending users found!";
+        }
+    },
+
+    viewVerifiedDematUsers: async function(){
+        this.accounts = await web3.eth.getAccounts();
+        this.contractInstance = new web3.eth.Contract(
+            artifact.abi,
+            contractAddress
+        );
+
+        const VerifiedDematUserCount = await this.contractInstance.methods.getCountOfVerifiedDematUsers().call();
+        const VerifiedDematUserIDs = await this.contractInstance.methods.getAllVerifiedDematUsersIDs().call();
+        let verifiedDematUser;
+
+        let tableCreated = false;
+        for (let i=0; i<VerifiedDematUserCount; i++) {
+            tableCreated = true;
+            await this.contractInstance.methods.getVerifiedDematUser(VerifiedDematUserIDs[i]).call().then(function(result) {
+                console.log(result);
+                verifiedDematUser = [
+                    { 
+                        Index: i+1, "Full Name": result[0], "Father Name": result[1], "Pan Number": result[2], "Phone Number": result[3], "Date Of Birth": result[4]
+                    },
+                ];
+
+                let data = Object.keys(verifiedDematUser[0]);
+                if (i==0)
+                    generateTableHead(table, data);
+                generateTable(table, verifiedDematUser);
+            });
+        }
+        if (!tableCreated) {
+            document.getElementById("verified-table-message").innerHTML = "No verified users found!";
+         }
+    },
+
+    viewVerifiedDematUserList: async function() {
+        const _pan_number = document.getElementById('checkinputpannumber').value.trim();
+        if (_pan_number.length==0) {
+            document.getElementById("exist1").innerHTML = "Enter Pan ID!";
+            document.getElementById("display-message").innerHTML = null;
+            document.getElementById("display-message-error").innerHTML = null;
+        }
+        else {
+            const validate = await this.contractInstance.methods.checkVerifiedDematUser(_pan_number).call();
+       
+            if (validate){
+                await this.contractInstance.methods.getVerifiedDematUser(_pan_number).call().then(function(result){
+                    console.log(result)
+                    document.getElementById("display-message").innerHTML = "Pan ID verified!";
+                    document.getElementById("display-message-error").innerHTML = null;
+                    document.getElementById("exist1").innerHTML = null;
+                });  
+            }
+            else{
+                document.getElementById("display-message-error").innerHTML = "Verification is still pending!";
+                document.getElementById("display-message").innerHTML = null;
+                document.getElementById("exist1").innerHTML = null;
+            }   
+        } 
+    },
 }
 
 window.App = App;
