@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link rel="icon" href="../images/favicon.png">
+
+    <!-- <script src="../index.js"></script> -->
+    <title>KYC Pending Users - Demat</title>
+    
+</head>
+
+    <!-- start of navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <a id="nav"class="navbar-brand logo-image" href="../index.html"><img src="../images/logo/KYC_Screen-Logo_White.png" alt="KYC_Screen-Logo_White"></a>
+    </nav>
+    <!-- start of navigation-->
+
+    <body>
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="header-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <h3 class="h3-text">Details of Pending Users</h3>
+                            <div class="table-responsive" id="pending-table">
+                                <table>
+                                    <!-- here goes table generated data! -->
+                                </table>
+                                <p id="pending-table-message"></p>
+                            </div>
+                            <div class="text-container hidden" id="text-hidden">
+                                <h1 class="form-h1">Verify User KYC Details</h1>
+                                        <label>Full Name:&nbsp;</label><p id="display-full-name" ></p><br>
+                                        <label>Father Name:&nbsp;</label><p id="display-father-name" ></p><br>
+                                        <label>Pan Number:&nbsp;</label><p id="display-pan-number" ></p><br>
+                                        <label>Phone Number:&nbsp;</label><p id="display-phone-number" ></p><br>
+                                        <label>DOB:&nbsp;</label><p id="display-dob"></p><br>
+                                        <p id="display-message" ></p>
+                                <div class="button-center">
+                                    <button type="submit" class="button-main" onclick="App.setVerifiedDematUser()">Verify</button>
+                                </div>    
+                            </div>
+                        </div>
+                    </div> <!-- end of row -->
+                </div> <!-- end of container -->
+            </div> <!-- end of header-content -->
+        </header> <!-- end of header -->
+        <!-- end of header -->
+    </body>
+    <script src="../index.js"></script>
+    <script>
+        window.onload = App.viewPendingDematUsers();
+    </script>
+</html>
