@@ -20,6 +20,7 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src/html/demat-kyc-registered-users.html", to: "html/demat-kyc-registered-users.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/demat-kyc-pending-users.html", to: "html/demat-kyc-pending-users.html" }]),
     new CopyWebpackPlugin([{ from: "./src/html/demat-kyc-verified-users.html", to: "html/demat-kyc-verified-users.html" }]),
+    new CopyWebpackPlugin([{ from: "./src/html/user-select-kyc.html", to: "html/user-select-kyc.html" }]),
     new CopyWebpackPlugin([{ from: "./src/css/style.css", to: "css/style.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/bootstrap.css", to: "css/bootstrap.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/LineIcons.2.0.css", to: "css/LineIcons.2.0.css" }]),
