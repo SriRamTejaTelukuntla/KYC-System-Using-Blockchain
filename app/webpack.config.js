@@ -28,8 +28,6 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src/css/animate.css", to: "css/animate.css" }]),
     new CopyWebpackPlugin([{ from: "./src/css/main.css", to: "css/main.css" }]),
     new CopyWebpackPlugin([{ from: "./src/images/favicon.png", to: "images/favicon.png" }]),
-    new CopyWebpackPlugin([{ from: "./src/images/KYC_Screen-Logo_White.png", to: "images/KYC_Screen-Logo_White.png" }]),
-    new CopyWebpackPlugin([{ from: "./src/images/KYC_Screen-Logo_White.webp", to: "images/KYC_Screen-Logo_White.webp" }]),
     new CopyWebpackPlugin([{ from: "./src/images/logo/KYC_Screen-Logo_White.png", to: "images/logo/KYC_Screen-Logo_White.png" }]),
     new CopyWebpackPlugin([{ from: "./src/images/logo/KYC_Screen-Logo_White.webp", to: "images/logo/KYC_Screen-Logo_White.webp" }]),
     new CopyWebpackPlugin([{ from: "./src/images/logo/footerlogo.svg", to: "images/logo/footerlogo.svg" }]),
