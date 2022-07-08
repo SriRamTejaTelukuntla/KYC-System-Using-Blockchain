@@ -33,8 +33,6 @@ module.exports = {
     new CopyWebpackPlugin([{ from: "./src/images/logo/KYC_Screen-Logo_White.png", to: "images/logo/KYC_Screen-Logo_White.png" }]),
     new CopyWebpackPlugin([{ from: "./src/images/logo/KYC_Screen-Logo_White.webp", to: "images/logo/KYC_Screen-Logo_White.webp" }]),
     new CopyWebpackPlugin([{ from: "./src/images/logo/footerlogo.svg", to: "images/logo/footerlogo.svg" }]),
-    new CopyWebpackPlugin([{ from: "./src/images/about/about-img.svg", to: "images/about/about-img.svg" }]),
-    new CopyWebpackPlugin([{ from: "./src/images/contact/contact-img.svg", to: "images/contact/contact-img.svg" }]),
     new CopyWebpackPlugin([{ from: "./src/images/hero/hero-bg.svg", to: "images/hero/hero-bg.svg" }]),
     new CopyWebpackPlugin([{ from: "./src/images/hero/hero-img.svg", to: "images/hero/hero-img.svg" }]),
     new CopyWebpackPlugin([{ from: "./src/fonts/LineIcons.eot", to: "fonts/LineIcons.eot" }]),
